@@ -101,24 +101,24 @@
     <div class="profile-container">
         <div class="profile-card">
             <img src="C:\Users\priya\OneDrive - Manipal Academy of Higher Education\Desktop\wtminorproject\WhatsApp Image 2024-10-29 at 12.20.32 PM.jpeg" alt="Profile Picture" class="profile-image">
-            <h2>Your Profile</h2>
+            <h2>User</h2>
             
 
 
             <div class="profile-info">
                 <div class="info-row">
                     <span>Username</span>
-                    <span id="profileName">loading..</span>
+                    <span id="profileName"></span>
                     
                 </div>
                 <div class="info-row">
                     <span>Email</span>
-                    <span id="profileEmail">loading.. </span>
+                    <span id="profileEmail"></span>
                    
                 </div>
                 <div class="info-row">
                     <span>Address</span>
-                    <span id= "profileAddress">loading..  </span>
+                    <span id= "profileAddress"> </span>
                     
                 </div>
                 
@@ -129,4 +129,41 @@
     </div>
 </body>
 
+<script>
+    
+        document.getElementById('greyscale-toggle').addEventListener('change', function() {
+            if (this.checked) {
+                // Add the greyscale class to the body when the toggle is on
+                document.body.classList.add('greyscale');
+            } else {
+                // Remove the greyscale class when the toggle is off
+                document.body.classList.remove('greyscale');
+            }
+        });
+        // check
+        function getUser(){
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+        
+        if(user){
+            user = users.find(user => user.userName === currentUser.userName);
+        }else{
+            window.location.href = 'login.html';
+        }
+        let user_Name_doc = document.getElementById('User_Name');
+        user_Name_doc.innerText=`Hi ${user.name}`
+    }
+    // end
+        window.onload = function() {
+    const userSession = JSON.parse(sessionStorage.getItem('userSession')); // Corrected: Use sessionStorage
+    if (userSession) {
+        document.getElementById('profileName').innerhtmlContent = userSession.name;
+        document.getElementById('profileEmail').innerhtmlContent = userSession.email;
+        document.getElementById('profileAddress').innerhtmlContent = userSession.address;
+    } else {
+        window.location.href = 'login_final.html';
+    }
+};
+
+</script>
 </html>

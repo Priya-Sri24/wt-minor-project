@@ -118,59 +118,69 @@
     </div>
 </body>
 <script>
- function handleFormValidation(event) {
-    event.preventDefault(); // Prevent form submission for validation
-    let isValid = true;
+ 
 
-    // Clear any existing errors
-    clearErrors(['name', 'number', 'address', 'email', 'password', 'cpassword']);
+    function handleFormValidation(event) {
+        event.preventDefault(); // Prevent form submission for validation
+        let isValid = true;
 
-    // Get values of all input fields
-    const name = document.getElementById('name').value;
-    const number = document.getElementById('number').value;
-    const address = document.getElementById('address').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const cpassword = document.getElementById('cpassword').value;
+        // Clear any existing errors
+        clearErrors(['name', 'number', 'address', 'email', 'password', 'cpassword']);
 
-    // Check if fields are empty or invalid, and display corresponding error messages
-    if (name.trim() === "") {
-        displayError('name', 'Name is required.');
-        isValid = false;
-    }
-    if (number.trim() === "") {
-        displayError('number', 'Number is required.');
-        isValid = false;
-    }
-    if (address.trim() === "") {
-        displayError('address', 'Address is required.');
-        isValid = false;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.trim() === "") {
-        displayError('email', 'Email is required.');
-        isValid = false;
-    } else if (!emailRegex.test(email)) {
-        displayError('email', 'Valid email is required.');
-        isValid = false;
-    }
-    if (password.trim() === "") {
-        displayError('password', 'Password is required.');
-        isValid = false;
-    }
-    if (cpassword.trim() === "") {
-        displayError('cpassword', 'Please confirm your password.');
-        isValid = false;
-    } else if (password !== cpassword) {
-        displayError('cpassword', 'Passwords do not match.');
-        isValid = false;
-    }
+        // Get values of all input fields
+        const name = document.getElementById('name').value;
+        const number = document.getElementById('number').value;
+        const address = document.getElementById('address').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const cpassword = document.getElementById('cpassword').value;
 
-    // Redirect if all fields are valid
-    if (isValid) {
-        window.location.href = 'login_final.html'; // Redirect to homepage if valid
-    }
+        // Check if fields are empty or invalid, and display corresponding error messages
+        if (name.trim() === "") {
+            displayError('name', 'Name is required.');
+            isValid = false;
+        }
+        if (number.trim() === "") {
+            displayError('number', 'Number is required.');
+            isValid = false;
+        }
+        if (address.trim() === "") {
+            displayError('address', 'Address is required.');
+            isValid = false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email.trim() === "") {
+            displayError('email', 'Email is required.');
+            isValid = false;
+        } else if (!emailRegex.test(email)) {
+            displayError('email', 'Valid email is required.');
+            isValid = false;
+        }
+        if (password.trim() === "") {
+            displayError('password', 'Password is required.');
+            isValid = false;
+        }
+        if (cpassword.trim() === "") {
+            displayError('cpassword', 'Please confirm your password.');
+            isValid = false;
+        } else if (password !== cpassword) {
+            displayError('cpassword', 'Passwords do not match.');
+            isValid = false;
+        }
+
+        // Save data to local storage if all fields are valid
+        if (isValid) {
+    const userData = { name, number, address, email, password };
+    localStorage.setItem('user', JSON.stringify(userData));
+    window.location.href = 'login_final.html';
 }
+
+   
+
+      } 
+
+
+
 
 function displayError(inputId, message) {
     const errorElement = document.getElementById(inputId + 'Error');
@@ -188,5 +198,4 @@ function clearErrors(inputIds) {
 
 </script> 
 </html>
-
 
